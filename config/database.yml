@@ -57,6 +57,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  host: 127.0.0.1
+  username: postgres
   database: rails-github-action_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
