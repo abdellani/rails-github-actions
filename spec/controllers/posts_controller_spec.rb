@@ -95,7 +95,7 @@ RSpec.describe PostsController, type: :controller do
       end
     end
   end
-
+=begin
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
@@ -141,5 +141,5 @@ RSpec.describe PostsController, type: :controller do
       expect(response).to redirect_to(posts_url)
     end
   end
-
+=end
 end
