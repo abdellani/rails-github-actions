@@ -1,3 +1,9 @@
+env:
+  RUBY_VERSION: 2.4
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: ""
+  POSTGRES_DB: postgres
+
 name: Rails tests
 on: [push,pull_request]
 jobs:
@@ -7,27 +13,26 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
       - name: Install Rubocop
         run: gem install rubocop
       - name: Check code
         run: rubocop
   rspec-test:
     name: RSpec
+    needs: rubocop-test
     runs-on: ubuntu-18.04
     services:
       postgres:
-        image: postgres:10.8
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: ""
-          POSTGRES_DB: postgres
+        image: postgres:latest
         ports:
         - 5432:5432
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.4
+          ruby-version: ${{ env.RUBY_VERSION }}
       - name: Install postgres client
         run: sudo apt-get install libpq-dev
       - name: Install dependencies
