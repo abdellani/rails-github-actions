@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    p 'fuck you asshole'
     @posts = Post.all
   end
 
